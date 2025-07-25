@@ -20,3 +20,26 @@ a=0;b=1;c=1;
 #40 $stop;
 end
 endmodule
+
+single clock
+
+module test;
+reg clk,a,b,c;
+wire f1,f2;
+clk dut(clk,a,b,c,f1,f2);
+initial
+clk=0;
+always #5 clk=~clk;
+initial
+begin
+$monitor($time,"clk=%b,a=%b,b=%b,c=%b,f1=%b,f2=%b",clk,a,b,c,f1,f2);
+a=0;b=1;c=1;
+#10 a=1;
+#10 b=0;
+#10 c=1;
+#10 a=0;
+#10 b=1;
+#10 c=0;
+#40 $stop;
+end
+endmodule
